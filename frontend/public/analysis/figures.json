@@ -1,0 +1,20 @@
+{
+  "model_name": "Logistic Regression",
+  "figures": [
+    {
+      "file": "risk_by_symptom.png",
+      "title": "Diabetes rate for each symptom",
+      "caption": "Of the people who reported a symptom, the share who turned out diabetic. Bars past the dashed line are red flags: that symptom means above-average risk."
+    },
+    {
+      "file": "feature_importance.png",
+      "title": "Which symptoms matter most",
+      "caption": "How much each symptom moves the model's estimate. The bigger the bar, the more that symptom pushes your risk up or down."
+    },
+    {
+      "file": "eda_overview.png",
+      "title": "Who is in the data",
+      "caption": "How many of the 520 people were diagnosed, and how age spreads across outcomes."
+    }
+  ]
+}
