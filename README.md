@@ -1,57 +1,76 @@
 # Diabetes Risk Prediction
 
-This project is a web application that predicts a patient's risk of diabetes based on various health metrics and lifestyle factors. It uses a machine learning model trained on BRFSS (Behavioral Risk Factor Surveillance System) data.
+This project is a web application that predicts a patient's risk of diabetes based on various health metrics and lifestyle factors. It uses a machine learning model trained on the widely trusted **CDC BRFSS (Behavioral Risk Factor Surveillance System)** data. 
+
+## The Dataset
+
+To ensure realistic and generalizable predictions, the model was trained carefully to mitigate overfitting. 
+
+* **Size:** Over 250,000 patients
+* **Target:** 14% of the patients in the dataset were diagnosed with diabetes.
+* **Features:** Started with 21 features and 2 classes.
+* **Overfitting Mitigation:** We explicitly dropped "leaky" symptoms (such as polyuria) to prevent the model from artificially learning the answers and overfitting the data.
+
+### Lifestyle Indicators
+The model evaluates risk based on core lifestyle and health indicators:
+- High Blood Pressure
+- High Cholesterol
+- BMI / Physical Activity
+- Smoking History & Heavy Alcohol Consumption
+- History of Stroke & Heart Disease
+- Difficulty Walking
+- Age & Demographics
+
+## Model Evaluation & Performance
+
+We emphasize **honest and realistic** evaluation over artificially inflated numbers. 
+
+Using an **80/20 stratified split** and **5-fold cross-validation** (CV ROC-AUC: 0.779 ± 0.001), the model proves to be stable and not just a "lucky split."
+
+| Metric | Logistic Regression | Random Forest |
+| ------ | ------------------- | ------------- |
+| **Accuracy** | 85.9% | 86.2% |
+| **ROC-AUC** | 0.776 | 0.780 |
+| **Precision**| 46.7% | 46.5% |
+| **Recall**   | 7.3%  | 7.3%  |
+
+*Note: The Random Forest model overfits for a negligible +0.3% gain. The Logistic Regression model was chosen as it provides robust, generalizable predictive power while being interpretable.*
+
+## Visualizations
+
+We explored the data deeply using Python to understand the underlying drivers of diabetes risk.
+
+<p align="center">
+  <img src="frontend/public/analysis/risk_by_symptom.png" alt="Diabetes rate for each symptom" width="45%" />
+  <img src="frontend/public/analysis/feature_importance.png" alt="Feature Importance" width="45%" />
+</p>
+
+- **High Blood Pressure and High Cholesterol** stand out as the top drivers for diabetes.
+- The Logistic Regression weights strongly emphasize **High Blood Pressure, Difficulty Walking, and High Cholesterol**.
 
 ## Project Structure
 
-The project consists of two main components:
-- **Backend (`/backend`)**: A FastAPI application that serves the machine learning model and provides REST API endpoints for inference, metrics, and dataset statistics.
-- **Frontend (`/frontend`)**: A React application built with Vite and TypeScript that provides an interactive dashboard for users to input their data and view their risk assessment.
-
-## Features
-
-The model uses the following patient features to predict diabetes risk:
-- Age & Gender
-- High Blood Pressure
-- High Cholesterol
-- Smoking History
-- History of Stroke
-- Heart Disease or Attack
-- Physical Activity
-- Heavy Alcohol Consumption
-- Difficulty Walking or Climbing Stairs
-
-## Prerequisites
-
-- Node.js & npm (for the frontend)
-- Python 3.8+ (for the backend)
-- Homebrew (optional, for Mac users as `start.sh` adds Homebrew to PATH)
+- **Backend (`/backend`)**: A FastAPI application that serves the ML model and provides REST API endpoints.
+- **Frontend (`/frontend`)**: A React application built with Vite and TypeScript offering a sleek, interactive dashboard for checking risk estimates.
 
 ## Running the Application Locally
 
-You can launch both the backend API and the frontend dashboard simultaneously using the provided startup script.
-
-Run the following command from the project root:
+You can launch both the backend API and the frontend dashboard simultaneously using the provided script. From the project root, run:
 
 ```bash
 ./start.sh
 ```
 
-This will:
-1. Start the FastAPI backend on `http://localhost:8000`.
-2. Start the React frontend on `http://localhost:5173`.
+This will start:
+1. The FastAPI backend on `http://localhost:8000`.
+2. The React frontend on `http://localhost:5173`.
 
 To stop the application, simply press `Ctrl-C` in the terminal.
 
-## Backend Endpoints
+## API Endpoints
 
 - `GET /health`: Health check endpoint.
-- `GET /features`: Returns the features required by the model.
+- `GET /features`: Returns the required model features.
 - `GET /metrics`: Returns model performance metrics.
 - `GET /dataset`: Returns dataset statistics.
-- `POST /predict`: Expects patient feature data and returns the probability and classified risk of diabetes.
-
-## Development
-
-- **Backend**: Python environment is managed in `backend/venv`. Ensure you activate it (`source venv/bin/activate`) before installing new dependencies or making changes to the ML model. The model artifacts are saved in `backend/artifacts`.
-- **Frontend**: Navigate to `frontend/` and run `npm install` to install dependencies. You can run `npm run dev` to start the frontend development server independently.
+- `POST /predict`: Expects patient feature data and returns the probability and classified risk (e.g., "Routine monitoring" vs "Refer for a fasting blood glucose test soon").
