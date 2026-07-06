@@ -1,5 +1,9 @@
 # Diabetes Risk Prediction
 
+<p align="center">
+  <img src="frontend/src/assets/hero.png" alt="Diabetes Risk Predictor UI" width="80%" />
+</p>
+
 This project is a web application that predicts a patient's risk of diabetes based on various health metrics and lifestyle factors. It uses a machine learning model trained on the widely trusted **CDC BRFSS (Behavioral Risk Factor Surveillance System)** data. 
 
 ## The Dataset
