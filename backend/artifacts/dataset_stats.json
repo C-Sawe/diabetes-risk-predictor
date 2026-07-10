@@ -1,83 +1,83 @@
 {
-  "n_samples": 253680,
+  "n_samples": 1000,
   "n_features": 10,
   "age_min": 1,
   "age_max": 13,
   "class_balance": {
-    "positive": 35346,
-    "negative": 218334
+    "positive": 135,
+    "negative": 865
   },
   "symptom_prevalence": [
     {
       "feature": "HighBP",
       "label": "High Blood Pressure",
-      "positive_rate": 0.753,
-      "negative_rate": 0.377,
-      "gap": 0.376
+      "positive_rate": 0.763,
+      "negative_rate": 0.373,
+      "gap": 0.39
     },
     {
       "feature": "HighChol",
       "label": "High Cholesterol",
-      "positive_rate": 0.67,
-      "negative_rate": 0.384,
-      "gap": 0.286
+      "positive_rate": 0.659,
+      "negative_rate": 0.358,
+      "gap": 0.301
     },
     {
       "feature": "DiffWalk",
       "label": "Difficulty Walking or Climbing Stairs",
-      "positive_rate": 0.371,
-      "negative_rate": 0.135,
-      "gap": 0.236
-    },
-    {
-      "feature": "HeartDiseaseorAttack",
-      "label": "Heart Disease or Attack",
-      "positive_rate": 0.223,
-      "negative_rate": 0.073,
-      "gap": 0.15
+      "positive_rate": 0.304,
+      "negative_rate": 0.133,
+      "gap": 0.171
     },
     {
       "feature": "PhysActivity",
       "label": "Physical Activity (past 30 days)",
-      "positive_rate": 0.631,
-      "negative_rate": 0.777,
-      "gap": -0.146
+      "positive_rate": 0.637,
+      "negative_rate": 0.779,
+      "gap": -0.142
     },
     {
-      "feature": "Smoker",
-      "label": "Smoker (100+ cigarettes in life)",
-      "positive_rate": 0.518,
-      "negative_rate": 0.431,
-      "gap": 0.087
-    },
-    {
-      "feature": "Stroke",
-      "label": "History of Stroke",
-      "positive_rate": 0.092,
-      "negative_rate": 0.032,
-      "gap": 0.06
+      "feature": "HeartDiseaseorAttack",
+      "label": "Heart Disease or Attack",
+      "positive_rate": 0.193,
+      "negative_rate": 0.075,
+      "gap": 0.117
     },
     {
       "feature": "Sex",
       "label": "Male",
-      "positive_rate": 0.479,
-      "negative_rate": 0.434,
-      "gap": 0.045
+      "positive_rate": 0.511,
+      "negative_rate": 0.436,
+      "gap": 0.075
+    },
+    {
+      "feature": "Smoker",
+      "label": "Smoker (100+ cigarettes in life)",
+      "positive_rate": 0.526,
+      "negative_rate": 0.454,
+      "gap": 0.072
+    },
+    {
+      "feature": "Stroke",
+      "label": "History of Stroke",
+      "positive_rate": 0.081,
+      "negative_rate": 0.027,
+      "gap": 0.055
     },
     {
       "feature": "HvyAlcoholConsump",
       "label": "Heavy Alcohol Consumption",
-      "positive_rate": 0.024,
-      "negative_rate": 0.061,
-      "gap": -0.038
+      "positive_rate": 0.022,
+      "negative_rate": 0.065,
+      "gap": -0.043
     }
   ],
   "age_distribution": [
     {
       "band": "10-19",
-      "positive": 18311,
-      "negative": 70759,
-      "positivity_rate": 0.206
+      "positive": 69,
+      "negative": 276,
+      "positivity_rate": 0.2
     },
     {
       "band": "20-29",

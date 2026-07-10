@@ -1,94 +1,94 @@
 {
-  "model_name": "Logistic Regression",
-  "accuracy": 0.8592,
-  "precision": 0.4667,
-  "recall": 0.0733,
-  "specificity": 0.9864,
-  "f1": 0.1267,
-  "roc_auc": 0.7756,
+  "model_name": "Hybrid Ensemble (Voting)",
+  "accuracy": 0.865,
+  "precision": 0.5,
+  "recall": 0.037,
+  "specificity": 0.9942,
+  "f1": 0.069,
+  "roc_auc": 0.7583,
   "confusion_matrix": [
     [
-      43075,
-      592
+      172,
+      1
     ],
     [
-      6551,
-      518
+      26,
+      1
     ]
   ],
   "cv_scores": [
-    0.7798,
-    0.778,
-    0.7769,
-    0.7783,
-    0.7801
+    0.7033,
+    0.7388,
+    0.8091,
+    0.7197,
+    0.7263
   ],
-  "cv_mean": 0.7786,
-  "cv_std": 0.0012,
+  "cv_mean": 0.7394,
+  "cv_std": 0.0367,
   "feature_importance": [
     {
       "feature": "HighBP",
       "label": "High Blood Pressure",
-      "importance": 0.0652,
-      "std": 0.0044
-    },
-    {
-      "feature": "DiffWalk",
-      "label": "Difficulty Walking or Climbing Stairs",
-      "importance": 0.0202,
-      "std": 0.004
+      "importance": 0.0785,
+      "std": 0.0248
     },
     {
       "feature": "HighChol",
       "label": "High Cholesterol",
-      "importance": 0.02,
-      "std": 0.0026
+      "importance": 0.0231,
+      "std": 0.0194
+    },
+    {
+      "feature": "DiffWalk",
+      "label": "Difficulty Walking or Climbing Stairs",
+      "importance": 0.0127,
+      "std": 0.0132
     },
     {
       "feature": "Age",
       "label": "Age Category",
-      "importance": 0.0118,
-      "std": 0.0029
-    },
-    {
-      "feature": "HvyAlcoholConsump",
-      "label": "Heavy Alcohol Consumption",
-      "importance": 0.0065,
-      "std": 0.002
-    },
-    {
-      "feature": "HeartDiseaseorAttack",
-      "label": "Heart Disease or Attack",
-      "importance": 0.0046,
-      "std": 0.0012
-    },
-    {
-      "feature": "PhysActivity",
-      "label": "Physical Activity (past 30 days)",
-      "importance": 0.0032,
-      "std": 0.0011
-    },
-    {
-      "feature": "Sex",
-      "label": "Male",
-      "importance": 0.0023,
-      "std": 0.0007
-    },
-    {
-      "feature": "Stroke",
-      "label": "History of Stroke",
-      "importance": 0.0013,
-      "std": 0.0003
+      "importance": 0.0126,
+      "std": 0.0163
     },
     {
       "feature": "Smoker",
       "label": "Smoker (100+ cigarettes in life)",
-      "importance": 0.0001,
-      "std": 0.0002
+      "importance": 0.0092,
+      "std": 0.0128
+    },
+    {
+      "feature": "HeartDiseaseorAttack",
+      "label": "Heart Disease or Attack",
+      "importance": 0.0037,
+      "std": 0.0038
+    },
+    {
+      "feature": "Stroke",
+      "label": "History of Stroke",
+      "importance": 0.0002,
+      "std": 0.0012
+    },
+    {
+      "feature": "HvyAlcoholConsump",
+      "label": "Heavy Alcohol Consumption",
+      "importance": -0.0028,
+      "std": 0.005
+    },
+    {
+      "feature": "PhysActivity",
+      "label": "Physical Activity (past 30 days)",
+      "importance": -0.0078,
+      "std": 0.0084
+    },
+    {
+      "feature": "Sex",
+      "label": "Male",
+      "importance": -0.0153,
+      "std": 0.0142
     }
   ],
   "test_size": 0.2,
   "cv_folds": 5,
-  "n_test": 50736,
-  "n_train": 202944
+  "n_test": 200,
+  "n_train": 800
 }

@@ -1,5 +1,5 @@
 {
-  "model_name": "Logistic Regression",
+  "model_name": "Hybrid Ensemble (Voting)",
   "figures": [
     {
       "file": "risk_by_symptom.png",
@@ -14,7 +14,7 @@
     {
       "file": "eda_overview.png",
       "title": "Who is in the data",
-      "caption": "How many of the 520 people were diagnosed, and how age spreads across outcomes."
+      "caption": "How many of the 1000 people were diagnosed, and how age spreads across outcomes."
     }
   ]
 }
