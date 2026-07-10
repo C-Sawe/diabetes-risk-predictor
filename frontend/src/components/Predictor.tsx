@@ -133,6 +133,17 @@ export function Predictor({ schema }: Props) {
                   {result.risk.band} risk
                 </span>
                 <p className="check__advice">{result.risk.action}</p>
+
+                {result.drivers && (result.drivers.top_risk || result.drivers.top_reducer) && (
+                  <div style={{ marginTop: "1rem", padding: "1rem", backgroundColor: "var(--bg)", borderRadius: "var(--r)", fontSize: "0.9rem", color: "var(--ink)" }}>
+                    <strong>Personalized Insight:</strong> Your estimate was 
+                    {result.drivers.top_risk ? ` driven by ${result.drivers.top_risk}` : ""}
+                    {result.drivers.top_risk && result.drivers.top_reducer ? ", but " : ""}
+                    {result.drivers.top_reducer && !result.drivers.top_risk ? " reduced by " : ""}
+                    {result.drivers.top_reducer ? ` offset slightly by ${result.drivers.top_reducer}` : ""}
+                    .
+                  </div>
+                )}
               </div>
             )}
           </div>

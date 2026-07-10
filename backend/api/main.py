@@ -81,6 +81,24 @@ def predict(patient: PatientInput) -> dict:
     try:
         X = _to_feature_row(patient)
         probability = float(_model.predict_proba(X)[0, 1])
+
+        # Calculate interpretability drivers from Logistic Regression base model
+        X_scaled = _model.named_steps["prep"].transform(X)
+        lr_coefs = _model.named_steps["clf"].named_estimators_["lr"].coef_[0]
+        contributions = X_scaled[0] * lr_coefs
+        
+        feature_contributions = [
+            {"label": data.FEATURE_LABELS[f], "contribution": float(c)}
+            for f, c in zip(data.FEATURE_ORDER, contributions)
+        ]
+        feature_contributions.sort(key=lambda x: x["contribution"], reverse=True)
+        
+        top_risk = feature_contributions[0]["label"] if feature_contributions[0]["contribution"] > 0 else None
+        top_reducer = feature_contributions[-1]["label"] if feature_contributions[-1]["contribution"] < 0 else None
+
+        drivers = {}
+        if top_risk: drivers["top_risk"] = top_risk
+        if top_reducer: drivers["top_reducer"] = top_reducer
     except Exception as exc:  # noqa: BLE001
         raise HTTPException(status_code=500, detail=f"Inference failed: {exc}") from exc
 
@@ -88,4 +106,5 @@ def predict(patient: PatientInput) -> dict:
         "probability": round(probability, 4),
         "prediction": "Positive" if probability >= 0.5 else "Negative",
         "risk": classify_risk(probability),
+        "drivers": drivers,
     }

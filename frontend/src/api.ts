@@ -75,6 +75,7 @@ export interface Prediction {
   probability: number;
   prediction: "Positive" | "Negative";
   risk: { band: string; action: string; tone: "ok" | "warn" | "danger" };
+  drivers?: { top_risk?: string; top_reducer?: string };
 }
 
 export interface Figure {
