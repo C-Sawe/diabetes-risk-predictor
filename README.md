@@ -10,7 +10,7 @@ This project is a web application that predicts a patient's risk of diabetes bas
 
 To ensure realistic and generalizable predictions, the model was trained carefully to mitigate overfitting. 
 
-* **Size:** Over 250,000 patients
+* **Size:** 1,000 patients
 * **Target:** 14% of the patients in the dataset were diagnosed with diabetes.
 * **Features:** Started with 21 features and 2 classes.
 * **Overfitting Mitigation:** We explicitly dropped "leaky" symptoms (such as polyuria) to prevent the model from artificially learning the answers and overfitting the data.

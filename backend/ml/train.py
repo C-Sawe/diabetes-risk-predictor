@@ -29,11 +29,18 @@ from sklearn.preprocessing import StandardScaler
 from ml import data
 
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, VotingClassifier
 
-MODEL_NAME = "Logistic Regression"
+MODEL_NAME = "Hybrid Ensemble (Voting)"
 
 def make_model():
-    return LogisticRegression(random_state=42, max_iter=1000)
+    lr = LogisticRegression(random_state=42, max_iter=1000)
+    rf = RandomForestClassifier(random_state=42, n_estimators=100)
+    gb = GradientBoostingClassifier(random_state=42, n_estimators=100)
+    return VotingClassifier(
+        estimators=[("lr", lr), ("rf", rf), ("gb", gb)],
+        voting="soft"
+    )
 
 
 RANDOM_STATE = 42
@@ -150,6 +157,8 @@ def main() -> None:
     PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
     raw = data.load_raw()
+    if len(raw) > 1000:
+        raw = raw.sample(n=1000, random_state=RANDOM_STATE)
     encoded = data.encode(raw)
     X, y = encoded[data.FEATURE_ORDER], encoded[data.TARGET_COL]
 
@@ -159,6 +168,14 @@ def main() -> None:
     cv = StratifiedKFold(n_splits=CV_FOLDS, shuffle=True, random_state=RANDOM_STATE)
 
     model = build_pipeline()
+    
+    print("Evaluating individual models for comparison...")
+    for name, clf in model.named_steps["clf"].estimators:
+        clf_pipe = Pipeline([("prep", model.named_steps["prep"]), ("clf", clf)])
+        clf_cv = cross_val_score(clf_pipe, X_train, y_train, cv=cv, scoring="roc_auc")
+        print(f"  {name.upper()}: CV AUC = {clf_cv.mean():.3f}±{clf_cv.std():.3f}")
+        
+    print("Evaluating hybrid ensemble...")
     cv_scores = cross_val_score(model, X_train, y_train, cv=cv, scoring="roc_auc")
     model.fit(X_train, y_train)
 
@@ -211,7 +228,7 @@ def main() -> None:
              "caption": "How much each symptom moves the model's estimate. The bigger the bar, the "
                         "more that symptom pushes your risk up or down."},
             {"file": "eda_overview.png", "title": "Who is in the data",
-             "caption": "How many of the 520 people were diagnosed, and how age spreads across outcomes."},
+             "caption": f"How many of the {len(raw)} people were diagnosed, and how age spreads across outcomes."},
         ],
     }
 
